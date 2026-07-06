@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Register</title>
+</head>
+<body style="font-family: Arial, sans-serif; background: #f4f4f4; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh;">
+
+    <div style="width: 100%; max-width: 400px; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center; box-sizing: border-box; margin: 20px;">
+        <h2 id="form-title" style="color: #2c3e50; margin-bottom: 20px;">User Login</h2>
+        
+        <input type="email" id="email" placeholder="Enter Email" style="width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; font-size: 14px;">
+        <input type="password" id="password" placeholder="Enter Password" style="width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; font-size: 14px;">
+        
+        <button id="action-btn" onclick="handleAuth()" style="width: 100%; background: #2980b9; color: white; border: none; padding: 12px; border-radius: 4px; cursor: pointer; font-size: 16px; font-weight: bold; margin-top: 15px;">Login</button>
+        
+        <p style="margin-top: 20px; font-size: 14px;">
+            <a href="#" id="toggle-link" onclick="toggleForm()" style="color: #3498db; text-decoration: none; font-weight: 500;">Don't have an account? Register here</a>
+        </p>
+        
+        <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+        
+        <a href="index.html" style="color: #777; text-decoration: none; font-size: 14px; font-weight: bold;">⬅ Back to Store</a>
+    </div>
+
+    <script>
+        let isSignUp = false;
+
+        function toggleForm() {
+            isSignUp = !isSignUp;
+            const formTitle = document.getElementById("form-title");
+            const actionBtn = document.getElementById("action-btn");
+            const toggleLink = document.getElementById("toggle-link");
+
+            if (isSignUp) {
+                formTitle.innerText = "User Registration";
+                actionBtn.innerText = "Register";
+                toggleLink.innerText = "Already have an account? Login here";
+            } else {
+                formTitle.innerText = "User Login";
+                actionBtn.innerText = "Login";
+                toggleLink.innerText = "Don't have an account? Register here";
+            }
+        }
+
+        function handleAuth() {
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value.trim();
+
+            if (!email || !password) {
+                alert("Please enter both email and password!");
+                return;
+            }
+
+            let users = JSON.parse(localStorage.getItem("users")) || [];
+
+            if (isSignUp) {
+                const userExists = users.some(u => u.email === email);
+                if (userExists) {
+                    alert("This email is already registered!");
+                    return;
+                }
+                users.push({ email, password });
+                localStorage.setItem("users", JSON.stringify(users));
+                alert("🎉 Registration Successful! Now you can Login.");
+                toggleForm();
+            } else {
+                const user = users.find(u => u.email === email && u.password === password);
+                if (user) {
+                    alert("🎉 Login Successful! Welcome back.");
+                    window.location.href = "index.html";
+                } else {
+                    alert("❌ Invalid email or password! Please register first.");
+                }
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeAlpha E-commerce</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header style="background: #333; color: white; padding: 15px; text-align: center;">
+        <h1>My E-Commerce Store</h1>
+        <!-- Cart text ke andar humne id="cart-count" de diya hai taaki number update ho sake -->
+        <a href="cart.html" style="color: #f1c40f; text-decoration: none; font-weight: bold;">Go to Cart (<span id="cart-count">0</span>)</a>
+        <a href="login.html" style="color: white; text-decoration: none; font-weight: bold; margin-left: 20px;">Login</a>
+    </header>
+
+    <main>
+        <h2 style="text-align: center; margin-top: 20px;">Our Products</h2>
+        <div id="products-container" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 20px;">
+            <!-- Products script.js ke zariye yahan apne aap dikhenge -->
+        </div>
+    </main>
+
+    <!-- Cart ko handle karne ka chota sa script -->
+    <script>
+        // Page load hote hi check karega ki cart mein pehle se kitne items hain
+        function updateCartCount() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            document.getElementById('cart-count').innerText = cart.length;
+        }
+
+        // Cart count ko screen par update karne ke liye call kiya
+        updateCartCount();
+
+        // Ye function hum script.js se connect karenge jab button click hoga
+        window.addEventListener('storage', updateCartCount);
+    </script>
+
+    <script src="script.js"></script>
+</body>
+</html>

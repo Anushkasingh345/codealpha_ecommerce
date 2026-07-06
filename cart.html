@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+</head>
+<body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f9f9f9;">
+
+    <header style="background: #333; color: white; padding: 15px; text-align: center;">
+        <h1>Your Shopping Cart</h1>
+        <a href="/" style="color: #f1c40f; text-decoration: none; font-weight: bold;">⬅ Back to Shop</a>
+    </header>
+
+    <main style="max-width: 600px; margin: 30px auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+        <div id="cart-container"></div>
+
+        <div style="margin-top: 20px; text-align: right; font-size: 18px; font-weight: bold;">
+            Total Price: Rs. <span id="total-price">0</span>
+        </div>
+
+        <button id="checkout-btn" onclick="processOrder()" style="background: #e67e22; color: white; border: none; padding: 12px 20px; border-radius: 5px; cursor: pointer; width: 100%; font-size: 16px; margin-top: 20px; font-weight: bold;">
+            Proceed to Checkout (Place Order)
+        </button>
+    </main>
+
+    <script src="./cart.js"></script>
+</body>
+</html>
